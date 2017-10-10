@@ -58,19 +58,25 @@
                     <li><a href="Dashboard.php"><i class="fa fa-tachometer fa-fw">
                         <div class="icon-bg bg-orange"></div>
                     </i><span class="menu-title">Dashboard</span></a></li>
-                    <li class="active"><a href="#"><i class="fa fa-medkit fa-fw">
+                    <li><a href="Medicine.php"><i class="fa fa-medkit fa-fw">
                         <div class="icon-bg bg-green"></div>
                     </i><span class="menu-title">Medicine</span></a>
+                    <li class="active"><a href="#">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-edit fa-fw">
+                        <div class="icon-bg bg-green"></div>
+                    </i><span class="menu-title">Medicine Category</span></a>
                     <li><a href="Employee.php"><i class="fa fa-user fa-fw">
                         <div class="icon-bg bg-green"></div>
                     </i><span class="menu-title">Employee</span></a>
                     <li><a href="Sales.php"><i class="fa fa-shopping-cart fa-fw">
                         <div class="icon-bg bg-green"></div>
                     </i><span class="menu-title">Sales</span></a>
-                    <li><a href="#"><i class="fa fa-money fa-fw">
+                    <li><a href="Expense.php"><i class="fa fa-money fa-fw">
                         <div class="icon-bg bg-green"></div>
                     </i><span class="menu-title">Expenses</span></a>
-                    <li><a href="#"><i class="fa fa-clipboard fa-fw">
+                    <li><a href="Employee_Category.php">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-edit fa-fw">
+                        <div class="icon-bg bg-green"></div>
+                    </i><span class="menu-title">Expense Category</span></a>
+                    <li><a href="Reports.php"><i class="fa fa-clipboard fa-fw">
                         <div class="icon-bg bg-green"></div>
                     </i><span class="menu-title">Reports</span></a>
                 </ul>
@@ -95,22 +101,14 @@
                 <!--BEGIN CONTENT-->
                 <div class="page-content">
                     <div id="tab-general">
-                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#add_data_Modal" id="add_button" style="margin-bottom: 20px;"><i class="fa fa-plus-circle"></i> Add Medicine</button>
+                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#add_data_Modal" id="add_button" style="margin-bottom: 20px;"><i class="fa fa-plus-circle"></i> Add Medicine Category</button>
                         
                         <table id="user_data" class="ui celled table table-striped table-hover"  cellspacing="0" width="100%">
 						  <thead>
 							  <tr>
-								<th>Name</th>
-								<th>Category</th>
-								<th>Store<br>Box</th>
-								<th>Purchase<br>Price</th>
-								<th>Selling<br>Price</th>
-								<th>Quantity</th>
-								<th>Generic<br>Name</th>
-								<th>Company</th>
-								<th>Effects</th>
-								<th>Expiry<br>Date</th>
-               					<th>Action</th>
+                                <th>Category</th>
+								<th>Description</th>
+               					<th width="20%;">Action</th>
 							  </tr>
 						  </thead>
                         </table>
@@ -153,35 +151,27 @@
 		$(document).ready(function(){
 			$('#add_button').click(function(){
 				$('#user_form')[0].reset();
-				$('.modal-title').text("Add Medicine");
+				$('.modal-title').text("Add Medicine Category");
 				$('#action').val("Insert");
-				$('#operation').val("Add");
+				$('#operation').val("Add Medicine Category");
 			});
 			var dataTable = $('#user_data').DataTable({
 				"ajax":{
-				url:"fetch.php",
+				url:"fetch_medicine_category.php",
 				type:"POST"
 			},
 				"columnDefs":[
 					{
-						"targets":[5,10],
+						"targets":[2],
 						"orderable":false,
 					},
 				],
 			});
 			$(document).on('submit', '#user_form',function(event){
 				event.preventDefault();
-				var name = $('#name').val();
-				var category = $('#category').val();
-				var store_box = $('#store_box').val();
-				var purchase_price = $('#purchase_price').val();
-				var selling_price = $('#selling_price').val();
-				var quantity = $('#quantity').val();
-				var generic_name = $('#generic_name').val();
-				var company = $('#company').val();
-				var effects = $('#effects').val();
-				var expiry_date = $('#expiry_date').val();
-				if(quantity != '')
+                var category = $('#category').val();
+				var description = $('#description').val();
+				if(category != '')
 				{
 					$.ajax({
 						url:"insert.php",
@@ -206,27 +196,19 @@
 			$(document).on('click', '.update', function(){
 			var user_id = $(this).attr("id");
 			$.ajax({
-				url:"fetch_single.php",
+				url:"fetch_single_medicine_category.php",
 				method:"POST",
 				data:{user_id:user_id},
 				dataType:"json",
 				success:function(data)
 				{
 					$('#add_data_Modal').modal('show');
-					$('#name').val(data.name);
-					$('#category').val(data.category);
-					$('#store_box').val(data.store_box);
-					$('#purchase_price').val(data.purchase_price);
-					$('#selling_price').val(data.selling_price);
-					$('#quantity').val(data.quantity);
-					$('#generic_name').val(data.generic_name);
-					$('#company').val(data.company);
-					$('#effects').val(data.effects);
-					$('#expiry_date').val(data.expiry_date);
-					$('.modal-title').text("Edit Medicine");
+                    $('#category').val(data.category);
+                    $('#description').val(data.description);
+					$('.modal-title').text("Edit Medicine Category");
 					$('#user_id').val(user_id);
 					$('#action').val("Edit");
-					$('#operation').val("Edit");
+					$('#operation').val("Edit Medicine Category");
 				}
 			})
 			});
@@ -235,7 +217,7 @@
 				if(confirm("Are you sure you want to delete this?"))
 				{
 					$.ajax({
-						url:"delete.php",
+						url:"delete_medicine_category.php",
 						method:"POST",
 						data:{user_id:user_id},
 						success:function(data)
@@ -248,55 +230,6 @@
 				else
 				{
 					return false;	
-				}
-			});
-			$(document).on('click', '.load', function(){
-			var user_id2 = $(this).attr("id");
-			$.ajax({
-				url:"quantity.php",
-				method:"POST",
-				data:{user_id2:user_id2},
-				dataType:"json",
-				success:function(data)
-				{
-					$('#addquantitymodal').modal('show');
-                    $('#name2').val(data.name);
-                    $('#category2').val(data.category);
-                    $('#store_box2').val(data.store_box);
-                    $('#purchase_price2').val(data.purchase_price);
-                    $('#selling_price2').val(data.selling_price);
-                    $('#generic_name2').val(data.generic_name);
-                    $('#company2').val(data.company);
-                    $('#effects2').val(data.effects);
-                    $('#newdate').val(data.expiry_date);
-					$('#user_id2').val(user_id2);
-					$('#operation2').val("Load");
-				}
-			})
-			});
-			$(document).on('submit', '#addquantityform',function(event){
-				event.preventDefault();
-				var quantity2 = $('#addquantitytext').val();
-				if(quantity2 != '')
-				{
-					$.ajax({
-						url:"insert.php",
-						method:'POST',
-						data:new FormData(this),
-						contentType:false,
-						processData:false,
-						success:function(data)
-						{
-							alert(data);
-							$('#addquantityform')[0].reset();
-							$('#addquantitymodal').modal('hide');
-							dataTable.ajax.reload();
-						}
-					});
-				}
-				else
-				{
-					alert("Both Fields are Required");
 				}
 			});
 		});
@@ -358,51 +291,12 @@
     			<div class="modal-body">
     				<form method="post" id="user_form" enctype="multipart/form-data">
 	 				<span>
-     				<label>Name</label>
-     				<input type="text" id="name" name="name" class="form-control" required>
+     				<label>Category</label>
+     				<input type="text" id="category" name="category" class="form-control" required>
 	 				</span>
      				<br>
-     				<label>Category</label>
-                    <select class="form-control" name="category" id="category">
-                        <option value="Category 1">Category 1</option>
-                        <option value="Category 2">Category 2</option>
-                        <option value="Category 3">Category 3</option>
-                    </select>
-     				<br>
-     				<div class="row">
-     				<div class="col-lg-3">
-     				<label>Store Box</label>
-	   				<input type="text" name="store_box" id="store_box" class="form-control" required></input>
-     				<br>
-					</div>
-    				<div class="col-lg-3">
-     				<label>Purchase Price</label>
-     				<input type="number" name="purchase_price" id="purchase_price" class="form-control" required></input>
-     				<br>
-					</div>
-    				<div class="col-lg-3">
-     				<label>Selling Price</label>
-     				<input type="number" name="selling_price" id="selling_price" class="form-control" required></input>
-     				<br>
-					</div>
-    				<div class="col-lg-3">
-     				<label>Quantity</label>
-					<input type="number" name="quantity" id="quantity" class="form-control" required></input>
-     				<br>
-					</div>
-					</div>
-     				<label>Generic Name</label>
-     				<input type="text" name="generic_name" id="generic_name" class="form-control" required></input>
-     				<br>
-     				<label>Company</label>
-     				<input type="text" name="company" id="company" class="form-control" required></input>
-     				<br>
-     				<label>Effects</label>
-     				<input type="text" name="effects" id="effects" class="form-control" required></input>
-     				<br>
-     				<label>Expiry Date</label>
-     				<input type="date" name="expiry_date" id="expiry_date" class="form-control" required></input>
-     				<br>
+     				<label>Description</label>
+     				<input type="text" name="description" id="description" class="form-control" required></input>
     			</div>
     			<div class="modal-footer" style="background: #222222;color: white;">
 				<input type="hidden" name="user_id" id="user_id"></input>
@@ -414,38 +308,3 @@
     		</div>
     	</div>
     </div>
-    <div class="modal fade" id="addquantitymodal">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h4 class="modal-title"><i class="fa fa-edit"></i>  Load Medicine</h4>
-            </div>
-            <div class="modal-body">
-                <form role="form" id="addquantityform" action="medicine/load" method="post" enctype="multipart/form-data">
-
-                    <div class="form-group">
-                        <label for="exampleInputEmail1"> Add Quantity</label>
-                        <input type="text" class="form-control" name="addquantitytext" id="addquantitytext" value="" placeholder="">
-                    </div>
-                    <label>Expiry Date</label>
-                    <input type="date" name="datequantity" id="datequantity" class="form-control" required></input>
-                    <br>
-                    <input type="hidden" name="newdate" id="newdate"></input>
-                    <input type="hidden" name="name2" id="name2"></input>
-                    <input type="hidden" name="category2" id="category2"></input>
-                    <input type="hidden" name="store_box2" id="store_box2"></input>
-                    <input type="hidden" name="purchase_price2" id="purchase_price2"></input>
-                    <input type="hidden" name="selling_price2" id="selling_price2"></input>
-                    <input type="hidden" name="generic_name2" id="generic_name2"></input>
-                    <input type="hidden" name="company2" id="company2"></input>
-                    <input type="hidden" name="effects2" id="effects2"></input>
-                    <input type="hidden" name="user_id2" id="user_id2"></input>
-					<input type="hidden" name="operation2" id="operation2"></input>
-                    <button type="submit" name="submit" class="btn btn-info"> Submit</button>
-                </form>
-
-            </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div>

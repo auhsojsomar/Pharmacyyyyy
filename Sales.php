@@ -25,7 +25,7 @@
             <nav id="topbar" role="navigation" style="margin-bottom: 0;" data-step="3" class="navbar navbar-default navbar-static-top">
             <div class="navbar-header">
                 <button type="button" data-toggle="collapse" data-target=".sidebar-collapse" class="navbar-toggle"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
-                <a id="logo" href="http://themifycloud.com/demos/templates/KAdmin/KAdmin-Dark/index.html" class="navbar-brand"><span class="fa fa-rocket"></span><span class="logo-text">Pharmacy</span><span style="display: none" class="logo-text-icon">µ</span></a></div>
+                <a id="logo" href="Dashboard.php" class="navbar-brand"><span class="fa fa-rocket"></span><span class="logo-text">Pharmacy</span><span style="display: none" class="logo-text-icon">µ</span></a></div>
             <div class="topbar-main"><a id="menu-toggle" href="#" class="hidden-xs"><i class="fa fa-bars"></i></a>
                 <ul class="nav navbar navbar-top-links navbar-right mbn">
                     <li class="dropdown topbar-user"><a data-hover="dropdown" href="#" class="dropdown-toggle"><img src="file:///F|/Desktopsasdas/images/avatar/48.jpg" alt="" class="img-responsive img-circle"/>&nbsp;<span class="hidden-xs">Admin</span>&nbsp;<span class="caret"></span></a>
@@ -52,19 +52,25 @@
                     <li><a href="Dashboard.php"><i class="fa fa-tachometer fa-fw">
                         <div class="icon-bg bg-orange"></div>
                     </i><span class="menu-title">Dashboard</span></a></li>
-                    <li><a href="Medicine2.php"><i class="fa fa-medkit fa-fw">
+                    <li><a href="Medicine.php"><i class="fa fa-medkit fa-fw">
                         <div class="icon-bg bg-green"></div>
                     </i><span class="menu-title">Medicine</span></a>
+                    <li><a href="Medicine_Category.php">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-edit fa-fw">
+                        <div class="icon-bg bg-green"></div>
+                    </i><span class="menu-title">Medicine Category</span></a>
                     <li><a href="Employee.php"><i class="fa fa-user fa-fw">
                         <div class="icon-bg bg-green"></div>
                     </i><span class="menu-title">Employee</span></a>
                     <li class="active"><a href="#"><i class="fa fa-shopping-cart fa-fw">
                         <div class="icon-bg bg-green"></div>
                     </i><span class="menu-title">Sales</span></a>
-                    <li><a href="#"><i class="fa fa-money fa-fw">
+                    <li><a href="Expense.php"><i class="fa fa-money fa-fw">
                         <div class="icon-bg bg-green"></div>
                     </i><span class="menu-title">Expenses</span></a>
-                    <li><a href="#"><i class="fa fa-clipboard fa-fw">
+                    <li><a href="Employee_Category.php">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-edit fa-fw">
+                        <div class="icon-bg bg-green"></div>
+                    </i><span class="menu-title">Expense Category</span></a>
+                    <li><a href="Reports.php"><i class="fa fa-clipboard fa-fw">
                         <div class="icon-bg bg-green"></div>
                     </i><span class="menu-title">Reports</span></a>
                 </ul>

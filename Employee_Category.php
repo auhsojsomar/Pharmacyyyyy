@@ -1,9 +1,8 @@
-<?php $error=""; ?>
 <!DOCTYPE html>
 <!-- saved from url=(0070)http://themifycloud.com/demos/templates/KAdmin/KAdmin-Dark/Layout.html -->
 <html lang="en">
    <head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Employee | Employee</title>
+    <title>Expenses | Expenses</title>
     
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,11 +14,13 @@
     <!--Loading bootstrap css-->
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <link type="text/css" rel="stylesheet" href="css/main.css">
-    
 
 <style id="holderjs-style" type="text/css"></style></head>
-<body name="body" class="pace-done" style="">
-<div>
+<body class="  pace-done" style=""><div class="pace  pace-inactive"><div class="pace-progress" data-progress-text="100%" data-progress="99" style="width: 100%; ">
+  <div class="pace-progress-inner"></div>
+</div>
+<div class="pace-activity"></div></div>
+    <div>
         <!--BEGIN THEME SETTING-->
         <!--END THEME SETTING-->
         <!--BEGIN BACK TO TOP-->
@@ -29,7 +30,6 @@
         <div id="header-topbar-option-demo" class="page-header-topbar">
             <nav id="topbar" role="navigation" style="margin-bottom: 0;" data-step="3" class="navbar navbar-default navbar-static-top">
             <div class="navbar-header">
-<!--                <button type="button" data-toggle="collapse" data-target=".sidebar-collapse" class="navbar-toggle"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>-->
                 <a id="logo" href="Dashboard.php" class="navbar-brand"><span class="fa fa-rocket"></span><span class="logo-text">Pharmacy</span><span style="display: none" class="logo-text-icon">µ</span></a></div>
             <div class="topbar-main"><a id="menu-toggle" href="Dashboard.php" class="hidden-xs"><i class="fa fa-bars"></i></a>
                 <ul class="nav navbar navbar-top-links navbar-right mbn">
@@ -64,7 +64,7 @@
                     <li><a href="Medicine_Category.php">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-edit fa-fw">
                         <div class="icon-bg bg-green"></div>
                     </i><span class="menu-title">Medicine Category</span></a>
-                    <li class="active"><a href="#"><i class="fa fa-user fa-fw">
+                    <li><a href="Employee.php"><i class="fa fa-user fa-fw">
                         <div class="icon-bg bg-green"></div>
                     </i><span class="menu-title">Employee</span></a>
                     <li><a href="Sales.php"><i class="fa fa-shopping-cart fa-fw">
@@ -73,7 +73,7 @@
                     <li><a href="Expense.php"><i class="fa fa-money fa-fw">
                         <div class="icon-bg bg-green"></div>
                     </i><span class="menu-title">Expenses</span></a>
-                    <li><a href="Employee_Category.php">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-edit fa-fw">
+                    <li class="active"><a href="#">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-edit fa-fw">
                         <div class="icon-bg bg-green"></div>
                     </i><span class="menu-title">Expense Category</span></a>
                     <li><a href="Reports.php"><i class="fa fa-clipboard fa-fw">
@@ -87,12 +87,12 @@
                 <div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
                     <div class="page-header pull-left">
                         <div class="page-title">
-                            Employee</div>
+                            Expenses</div>
                     </div>
                     <ol class="breadcrumb page-breadcrumb pull-right">
                         <li><i class="fa fa-home"></i>&nbsp;<a href="Dashboard.php">Home</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
-                        <li class="hidden"><a href="http://themifycloud.com/demos/templates/KAdmin/KAdmin-Dark/Layout.html#">Employee</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
-                        <li class="active">Employee</li>
+                        <li class="hidden"><a href="http://themifycloud.com/demos/templates/KAdmin/KAdmin-Dark/Layout.html#">Expenses</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
+                        <li class="active">Expenses</li>
                     </ol>
                     <div class="clearfix">
                     </div>
@@ -101,22 +101,16 @@
                 <!--BEGIN CONTENT-->
                 <div class="page-content">
                     <div id="tab-general">
-                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#add_data_Modal" id="add_button" style="margin-bottom: 20px;"><i class="fa fa-plus-circle"></i> Add Employee</button>
+                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#add_data_Modal" id="add_button" style="margin-bottom: 20px;"><i class="fa fa-plus-circle"></i> Add Employee Category</button>
                         
                         <table id="user_data" class="ui celled table table-striped table-hover"  cellspacing="0" width="100%">
-                          <thead>
-                              <tr>
-                                <th>Image</th>
-                                <th>First<br>Name</th>
-                                <th>Last<br>Name</th>
-                                <th>Address</th>
-                                <th>Phone<br>Number</th>
-                                <th>Email</th>
-                                <th>Username</th>
-                                <th>Password</th>
-                                <th>Option</th>
-                              </tr>
-                          </thead>
+						  <thead>
+							  <tr>
+                                <th>Category</th>
+								<th>Description</th>
+               					<th width="20%;">Action</th>
+							  </tr>
+						  </thead>
                         </table>
                     </div>
                 </div>
@@ -157,115 +151,86 @@
 		$(document).ready(function(){
 			$('#add_button').click(function(){
 				$('#user_form')[0].reset();
-				$('.modal-title').text("Add Employee");
-				$('#action').val("Add");
-				$('#operation').val("Add Employee");
-				$('#user_uploaded_image').html('');
+				$('.modal-title').text("Add Employee Category");
+				$('#action').val("Insert");
+				$('#operation').val("Add Employee Category");
 			});
-			
 			var dataTable = $('#user_data').DataTable({
-			"ajax":{
-				url:"fetch_employee.php",
+				"ajax":{
+				url:"fetch_employee_category.php",
 				type:"POST"
 			},
-			"columnDefs":[
-				{
-					"targets":[0, 6, 7, 8],
-					"orderable":false,
-				},
-			],
-
-			});
-			
-			$(document).on('submit', '#user_form', function(event){
-			event.preventDefault();
-			var firstname = $('#first_name').val();
-			var lastname = $('#last_name').val();
-			var address = $('#address').val();
-			var phone_number = $('#phone_number').val();
-			var email = $('#email').val();
-			var username = $('#username').val();
-            var password = $('#password').val();
-			var confirmpassword = $('#confirmpassword').val();
-			var extension = $('#user_image').val().split('.').pop().toLowerCase();
-			if(extension != '')
-			{
-				if(jQuery.inArray(extension, ['gif','png','jpg','jpeg']) == -1)
-				{
-					alert("Invalid Image File");
-					$('#user_image').val('');
-					return false;
-				}
-			}	
-            if(password != confirmpassword)
-            {
-                alert('Please confirm your password');
-            }
-			if(password == confirmpassword)
-			{
-				$.ajax({
-					url:"insert.php",
-					method:'POST',
-					data:new FormData(this),
-					contentType:false,
-					processData:false,
-					success:function(data)
+				"columnDefs":[
 					{
-						alert(data);
-						$('#user_form')[0].reset();
-						$('#add_data_Modal').modal('hide');
-						dataTable.ajax.reload();
-					}
-				});
-			}
+						"targets":[2],
+						"orderable":false,
+					},
+				],
 			});
-			
+			$(document).on('submit', '#user_form',function(event){
+				event.preventDefault();
+                var category = $('#category').val();
+				var description = $('#description').val();
+				if(category != '')
+				{
+					$.ajax({
+						url:"insert.php",
+						method:'POST',
+						data:new FormData(this),
+						contentType:false,
+						processData:false,
+						success:function(data)
+						{
+							alert(data);
+							$('#user_form')[0].reset();
+							$('#add_data_Modal').modal('hide');
+							dataTable.ajax.reload();
+						}
+					});
+				}
+				else
+				{
+					alert("Both Fields are Required");
+				}
+			});
 			$(document).on('click', '.update', function(){
 			var user_id = $(this).attr("id");
 			$.ajax({
-				url:"fetch_single_employee.php",
+				url:"fetch_single_employee_category.php",
 				method:"POST",
 				data:{user_id:user_id},
 				dataType:"json",
 				success:function(data)
 				{
 					$('#add_data_Modal').modal('show');
-					$('#first_name').val(data.first_name);
-					$('#last_name').val(data.last_name);
-					$('#address').val(data.address);
-					$('#phone_number').val(data.phone_number);
-					$('#email').val(data.email);
-					$('#username').val(data.username);
-                    $('#password').val(data.password);
-					$('#confirmpassword').val(data.password);
-					$('.modal-title').text("Edit Employee");
+                    $('#category').val(data.category);
+                    $('#description').val(data.description);
+					$('.modal-title').text("Edit Employee Category");
 					$('#user_id').val(user_id);
-					$('#user_uploaded_image').html(data.user_image);
 					$('#action').val("Edit");
-					$('#operation').val("Edit Employee");
+					$('#operation').val("Edit Employee Category");
 				}
 			})
 			});
-			
 			$(document).on('click', '.delete', function(){
-			var user_id = $(this).attr("id");
-			if(confirm("Are you sure you want to delete this?"))
-			{
-				$.ajax({
-					url:"delete_employee.php",
-					method:"POST",
-					data:{user_id:user_id},
-					success:function(data)
-					{
-						alert(data);
-						dataTable.ajax.reload();
-					}
-				});
-			}
-			else
-			{
-				return false;	
-			}
+				var user_id = $(this).attr("id");
+				if(confirm("Are you sure you want to delete this?"))
+				{
+					$.ajax({
+						url:"delete_employee_category.php",
+						method:"POST",
+						data:{user_id:user_id},
+						success:function(data)
+						{
+							alert(data);
+							dataTable.ajax.reload();
+						}
+					});
+				}
+				else
+				{
+					return false;	
+				}
 			});
 		});
 	</script>
@@ -285,8 +250,8 @@
     <script src="download file/pace.min.js.download"></script>
     <script src="download file/holder.js.download"></script>
     <script src="download file/responsive-tabs.js.download"></script>
-    <script src="download file/jquery.flot.js.download"></script>
     <script src="download file/jquery.flot.categories.js.download"></script>
+    <script src="download file/jquery.flot.js.download"></script>
     <script src="download file/jquery.flot.pie.js.download"></script>
     <script src="download file/jquery.flot.tooltip.js.download"></script>
     <script src="download file/jquery.flot.resize.js.download"></script>
@@ -316,74 +281,30 @@
         ga('send', 'pageview');
 	</script>
 <div id="flotTip" style="display: none; position: absolute; background: rgb(255, 255, 255); z-index: 1040; padding: 0.4em 0.6em; border-radius: 0.5em; font-size: 0.8em; border: 1px solid rgb(17, 17, 17); white-space: nowrap;"></div></body></html>
-
- <div id="add_data_Modal" class="modal fade">
+    <div id="add_data_Modal" class="modal fade">
     	<div class="modal-dialog">
-    	<form method="post" id="user_form" enctype="multipart/form-data">
     		<div class="modal-content">
     			<div class="modal-header" style="background: #222222;color: white;">
     				<button type="button" class="close" data-dismiss="modal" style="color: white;">&times;</button>
     				<h4 class="modal-title"><i id="iconmoto" class="fa fa-plus-circle"></i> Add Medicine</h4>
     			</div>
     			<div class="modal-body">
-<!--    				<form method="post" id="user_form" enctype="multipart/form-data">-->
+    				<form method="post" id="user_form" enctype="multipart/form-data">
 	 				<span>
-     				<label>First Name</label>
-     				<input type="text" id="first_name" name="first_name" class="form-control" required>
+     				<label>Category</label>
+     				<input type="text" id="category" name="category" class="form-control" required>
 	 				</span>
      				<br>
-				 	<span>
-     				<label>Last Name</label>
-     				<input type="text" id="last_name" name="last_name" class="form-control" required>
-	 				</span>
-     				<br>
-					<span>
-     				<label>Address</label>
-     				<input type="text" id="address" name="address" class="form-control" required>
-	 				</span>
-     				<br>
-					<span>
-     				<label>Phone Number</label>
-     				<input type="text" id="phone_number" name="phone_number" class="form-control" required>
-	 				</span>
-     				<br>
-					<span>
-     				<label>Email</label>
-     				<input type="text" id="email" name="email" class="form-control" required>
-	 				</span>
-     				<br>
-					<span>
-     				<label>Username</label>
-     				<input type="text" id="username" name="username" class="form-control" required>
-	 				</span>
-     				<br>
-					<span>
-     				<label>Password</label>
-     				<input type="password" id="password" name="password" class="form-control" required>
-	 				</span>
-                    <label>Confirm Password</label>
-                    <input type="password" id="confirmpassword" name="confirmpassword" class="form-control" required>
-                    </span>
-                    <br>
-                    <?php 
-                        
-                            echo $error;
-                        
-                     ?>
-					<span>
-     				<label>Select User Image</label>
-					<input type="file" name="user_image" id="user_image" />
-					<span id="user_uploaded_image"></span>
-     				<br>
+     				<label>Description</label>
+     				<input type="text" name="description" id="description" class="form-control" required></input>
     			</div>
     			<div class="modal-footer" style="background: #222222;color: white;">
 				<input type="hidden" name="user_id" id="user_id"></input>
 				<input type="hidden" name="operation" id="operation"></input>
-   				<input type="submit" id="action" name="action" value="Insert" class="btn btn-success btn-rounded"></input>
-    			<button type="button" class="btn btn-dark btn-rounded" data-dismiss="modal">Close</button>
+   				<input type="submit" id="action" name="action" value="Insert" class="btn btn-success"></input>
+    			<button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
    				</div>
-<!--   				</form>-->
+   				</form>
     		</div>
-    		</form>
     	</div>
     </div>

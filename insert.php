@@ -74,6 +74,52 @@ if(isset($_POST["operation"]))
 			echo 'Data Inserted';
 		}
 	}
+	if($_POST["operation"] == "Add Expenses")
+	{
+		$date = date('Y-m-d');
+		$statement = $connection->prepare("
+			INSERT INTO expenses (category, date_now, amount)VALUES(:category, '$date', :amount)");
+		$result = $statement->execute(
+			array(
+				':category'	=>	$_POST["category"],
+				':amount'	=>	$_POST["amount"]
+			)
+		);
+		if(!empty($result))
+		{
+			echo 'Data Inserted';
+		}
+	}
+	if($_POST["operation"] == "Add Medicine Category")
+	{
+		$statement = $connection->prepare("
+			INSERT INTO medicine_category (category, description)VALUES(:category, :description)");
+		$result = $statement->execute(
+			array(
+				':category'	=>	$_POST["category"],
+				':description'	=>	$_POST["description"]
+			)
+		);
+		if(!empty($result))
+		{
+			echo 'Data Inserted';
+		}
+	}
+	if($_POST["operation"] == "Add Employee Category")
+	{
+		$statement = $connection->prepare("
+			INSERT INTO employee_category (category, description)VALUES(:category, :description)");
+		$result = $statement->execute(
+			array(
+				':category'	=>	$_POST["category"],
+				':description'	=>	$_POST["description"]
+			)
+		);
+		if(!empty($result))
+		{
+			echo 'Data Inserted';
+		}
+	}
 	if($_POST["operation"] == "Edit")
 	{
 		$statement = $connection->prepare(
@@ -132,6 +178,66 @@ if(isset($_POST["operation"]))
 				':username'	=>	$_POST["username"],
 				':password'	=>	$_POST["password"],
 				':image'		=>	$image,
+				':id'			=>	$_POST["user_id"]
+			)
+		);
+		if(!empty($result))
+		{
+			echo 'Data Updated';
+		}
+	}
+	if($_POST["operation"] == "Edit Expenses")
+	{
+		$statement = $connection->prepare(
+			"UPDATE expenses 
+			SET category = :category,amount = :amount 
+			WHERE id = :id
+			"
+		);
+		$result = $statement->execute(
+			array(
+				':category'	=>	$_POST["category"],
+				':amount'	=>	$_POST["amount"],
+				':id'			=>	$_POST["user_id"]
+			)
+		);
+		if(!empty($result))
+		{
+			echo 'Data Updated';
+		}
+	}
+	if($_POST["operation"] == "Edit Medicine Category")
+	{
+		$statement = $connection->prepare(
+			"UPDATE medicine_category 
+			SET category = :category,description = :description 
+			WHERE id = :id
+			"
+		);
+		$result = $statement->execute(
+			array(
+				':category'	=>	$_POST["category"],
+				':description'	=>	$_POST["description"],
+				':id'			=>	$_POST["user_id"]
+			)
+		);
+		if(!empty($result))
+		{
+			echo 'Data Updated';
+		}
+	}
+	if($_POST["operation"] == "Edit Employee Category")
+	{
+		$statement = $connection->prepare(
+			"UPDATE employee_category 
+			SET category = :category,description = :description 
+			WHERE id = :id
+			"
+		);
+		$result = $statement->execute(
+			array(
+				':category'	=>	$_POST["category"],
+				':description'	=>	$_POST["description"],
 				':id'			=>	$_POST["user_id"]
 			)
 		);

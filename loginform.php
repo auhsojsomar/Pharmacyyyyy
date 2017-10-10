@@ -12,7 +12,7 @@ if(isset($_POST['submit']))
 	}
 	else if($row['status']=="Member")
 	{
-		 header("Location: Medicine2.php");
+		 header("Location: Medicine.php");
 	} 
 	   else
 	{
