@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 06, 2017 at 02:59 AM
+-- Generation Time: Oct 10, 2017 at 08:38 PM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -47,6 +47,51 @@ CREATE TABLE `employee` (
 INSERT INTO `employee` (`id`, `first_name`, `last_name`, `address`, `phone_number`, `email`, `username`, `password`, `status`, `image`, `deleted`) VALUES
 (22, 'First Name 2', 'Last Name 2', 'Address 2', 'Phone Number 2', 'Email 2', 'Username 2', 'Password 2', 'Member', '15165.png', 0),
 (21, 'First Name 1', 'Last Name 1', 'Address 1', 'Phone Number 1', 'Email 1', 'Username 1', 'Password 1', 'Member', '14053.png', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `employee_category`
+--
+
+CREATE TABLE `employee_category` (
+  `id` int(11) NOT NULL,
+  `category` varchar(100) NOT NULL,
+  `description` varchar(100) NOT NULL,
+  `deleted` int(11) NOT NULL DEFAULT '0'
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `employee_category`
+--
+
+INSERT INTO `employee_category` (`id`, `category`, `description`, `deleted`) VALUES
+(1, 'b', 'b', 0),
+(2, 'a', 'a', 0),
+(3, 'c', 'c', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `expenses`
+--
+
+CREATE TABLE `expenses` (
+  `id` int(11) NOT NULL,
+  `category` varchar(100) NOT NULL,
+  `date_now` varchar(100) NOT NULL,
+  `amount` varchar(100) NOT NULL,
+  `deleted` int(11) NOT NULL DEFAULT '0'
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `expenses`
+--
+
+INSERT INTO `expenses` (`id`, `category`, `date_now`, `amount`, `deleted`) VALUES
+(16, 'Category 1', '2017-10-10', '3', 0),
+(15, 'Category 1', '2017-10-10', '2', 0),
+(14, 'Category 1', '2017-10-10', '1', 0);
 
 -- --------------------------------------------------------
 
@@ -101,6 +146,29 @@ INSERT INTO `medicine` (`id`, `name`, `category`, `store_box`, `purchase_price`,
 (28, 'Name 4', 'Category 1', 'Store Box 4', 300, 400, 200, 'Generic Name 4', 'Company 4', 'Effects 4', '0037-12-03', 0),
 (22, 'Name 1', 'Category 1', 'Store Box 1', 50, 100, 200, 'Generic Name 1', 'Company 1', 'Effects 1', '2017-10-19', 0);
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `medicine_category`
+--
+
+CREATE TABLE `medicine_category` (
+  `id` int(11) NOT NULL,
+  `category` varchar(100) NOT NULL,
+  `description` varchar(100) NOT NULL,
+  `deleted` int(11) NOT NULL DEFAULT '0'
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `medicine_category`
+--
+
+INSERT INTO `medicine_category` (`id`, `category`, `description`, `deleted`) VALUES
+(1, 'd', 'd', 0),
+(2, 'f', 'f', 1),
+(3, 'e', 'e', 0),
+(4, 'f', 'f', 0);
+
 --
 -- Indexes for dumped tables
 --
@@ -109,6 +177,18 @@ INSERT INTO `medicine` (`id`, `name`, `category`, `store_box`, `purchase_price`,
 -- Indexes for table `employee`
 --
 ALTER TABLE `employee`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `employee_category`
+--
+ALTER TABLE `employee_category`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `expenses`
+--
+ALTER TABLE `expenses`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -125,6 +205,12 @@ ALTER TABLE `medicine`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `medicine_category`
+--
+ALTER TABLE `medicine_category`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -132,7 +218,17 @@ ALTER TABLE `medicine`
 -- AUTO_INCREMENT for table `employee`
 --
 ALTER TABLE `employee`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+--
+-- AUTO_INCREMENT for table `employee_category`
+--
+ALTER TABLE `employee_category`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT for table `expenses`
+--
+ALTER TABLE `expenses`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 --
 -- AUTO_INCREMENT for table `loginform`
 --
@@ -143,6 +239,11 @@ ALTER TABLE `loginform`
 --
 ALTER TABLE `medicine`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+--
+-- AUTO_INCREMENT for table `medicine_category`
+--
+ALTER TABLE `medicine_category`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
