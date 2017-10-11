@@ -280,7 +280,7 @@
                         while($row = mysqli_fetch_assoc($query))
                         {
                             ?>
-                            <option value="Category 1"><?php echo $row['category'] ?></option>
+                            <option value="<?php echo $row['category'] ?>"><?php echo $row['category'] ?></option>
                             <?php
                         }
                         ?>

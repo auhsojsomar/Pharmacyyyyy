@@ -8,7 +8,7 @@ if(isset($_POST['submit']))
 	$row=mysqli_fetch_assoc($query);
 	if($row['status']=="Administrator")
 	{
-	 header("Location: dashboard.php");
+	 header("Location: dashboard.php?admin");
 	}
 	else if($row['status']=="Member")
 	{

@@ -1,3 +1,7 @@
+<?php 
+session_start();
+$connect = mysqli_connect("localhost","root","","pharmacy");
+ ?>
 <!DOCTYPE html>
 <!-- saved from url=(0073)http://themifycloud.com/demos/templates/KAdmin/KAdmin-Dark/dashboard.html -->
 <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -113,7 +117,7 @@
                                           </tr>
                                       </thead>
                                       <tbody>
-                                        <?php 
+                                      <?php 
                                         $con=mysqli_connect("localhost","root","","pharmacy"); 
                                         if (mysqli_connect_errno()) 
                                         { 
@@ -138,7 +142,7 @@
                                         } 
                                         }
                                         mysqli_close($con); 
-                                        ?>
+                                        ?> 
                                       </tbody>
                                   </table>
                                   </div>
